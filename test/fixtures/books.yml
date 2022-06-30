@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  language: MyString
+  language_details: MyText
+  country: MyString
+  date_of_acquisition: 1
+  number_of_books: 1
+  notes: MyText
+  in_my_collection: false
+  wishlist: false
+  user: one
+
+two:
+  title: MyString
+  language: MyString
+  language_details: MyText
+  country: MyString
+  date_of_acquisition: 1
+  number_of_books: 1
+  notes: MyText
+  in_my_collection: false
+  wishlist: false
+  user: two

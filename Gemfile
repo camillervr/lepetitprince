@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.3"
+ruby "3.0.3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
@@ -10,7 +10,10 @@ gem "rails", "~> 7.0.3"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# gem "sqlite3", "~> 1.4"
+
+# Use postgresql as the database for Active Record
+gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -43,7 +46,17 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 # Use Sass to process CSS
-# gem "sassc-rails"
+gem "sassc-rails"
+
+gem "font-awesome-sass", "~> 6.1"
+
+gem "simple_form", github: "heartcombo/simple_form"
+
+# Use for scraping
+gem "nokogiri"
+
+# Use devise for authentification
+gem "devise"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

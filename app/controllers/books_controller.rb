@@ -20,12 +20,20 @@ class BooksController < ApplicationController
 
   def update
     @book.update(book_params)
-    redirect_to book_path(@book)
+    redirect_to books_path
   end
 
   def destroy
     @book.destroy
     redirect_to books_path, status: :see_other
+  end
+
+  def collection
+    @books = Book.in_my_collection
+  end
+
+  def wishlist
+    @books = Book.wishlist
   end
 
   private

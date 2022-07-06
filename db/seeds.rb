@@ -4,6 +4,8 @@ User.destroy_all
 user_one = User.new(
   email: "camille@sb.fr",
   password: "123456",
+  first_name: "Camille",
+  last_name: "Rivière"
 )
 user_one.save!
 

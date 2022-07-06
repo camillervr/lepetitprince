@@ -28,6 +28,14 @@ class BooksController < ApplicationController
     redirect_to books_path, status: :see_other
   end
 
+  def collection
+    @books = Book.in_my_collection
+  end
+
+  def wishlist
+    @books = Book.wishlist
+  end
+
   private
 
   def book_params

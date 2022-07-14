@@ -1,33 +1,38 @@
-<table class="table container">
-  <thead>
-    <tr>
-      <th scope="col">Langue</th>
-      <th scope="col">Titre</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
+<div class="container" data-searchbar-target="coucou">
+  <table class="table container">
+    <thead>
+      <tr>
+        <th scope="col">Langue</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Date d'aquisition</th>
+        <th scope="col">Notes</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
 
-  <tbody >
-    <% @books.find_each do |book| %>
-        <tr>
-          <td>
-            <%= book.language %>
-            <% unless book.language_details.to_s.empty? || book.language_details.nil? %>
-              <a data-bs-toggle="modal" data-bs-target="#languageDetailsModal">
-                <i class="fa-solid fa-circle-info"></i>
-              </a>
-            <% end %>
-          </td>
-          <td><img src="<%= book.title %>" alt=""></td>
-          <td><%= book.notes %></td>
-          <td>
-            <% if book.user == current_user %>
-              <%= link_to(edit_book_path(book), class: "data-bs-toggle='modal' data-bs-target='#updateModal'") do %>
-                <i class="fa-solid fa-pencil"></i>
+    <tbody>
+      <% @books.find_each do |book| %>
+          <tr>
+            <td>
+              <%= book.language %>
+              <% unless book.language_details.to_s.empty? || book.language_details.nil? %>
+                <a data-bs-toggle="modal" data-bs-target="#languageDetailsModal">
+                  <i class="fa-solid fa-circle-info"></i>
+                </a>
               <% end %>
-            <% end %>
-          </td>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
+            </td>
+            <td><img src="<%= book.title %>" alt=""></td>
+            <td><%= book.date_of_acquisition %></td>
+            <td><%= book.notes %></td>
+            <td>
+              <% if book.user == current_user %>
+                <%= link_to(edit_book_path(book), class: "data-bs-toggle='modal' data-bs-target='#updateModal'") do %>
+                  <i class="fa-solid fa-pencil"></i>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

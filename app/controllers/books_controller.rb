@@ -2,6 +2,11 @@ class BooksController < ApplicationController
   before_action :set_book, only: [ :show, :edit, :update, :destroy ]
   def index
     @books = Book.all
+
+    respond_to do |format|
+      format.html
+      format.text { render partial: "books/list", locals: {books: @books}, formats: [:html] }
+    end
   end
 
   def show() end

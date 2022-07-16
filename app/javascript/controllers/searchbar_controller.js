@@ -2,13 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="searchbar"
 export default class extends Controller {
-  static targets = ["form", "input", "coucou"]
+  static targets = ["form", "input", "list"]
 
   connect() {
     console.log("Youhou")
     console.log(this.formTarget)
     console.log(this.inputTarget)
-    console.log(this.coucouTarget)
+    console.log(this.listTarget)
   }
 
   update() {
@@ -18,7 +18,7 @@ export default class extends Controller {
     fetch(url, {headers: {"Accept": "text/plain"}})
       .then(response => response.text())
       .then((data) => {
-        this.coucouTarget.outerHTML = data
+        this.listTarget.outerHTML = data
       })
   }
 }

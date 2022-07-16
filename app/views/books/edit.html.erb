@@ -1,19 +1,41 @@
-<div class = "container mt-3" style = "width: 500px">
-  <%= simple_form_for @book do |f| %>
-    <div class="">
-      <%= f.input :language, :label => "Langue" %>
-      <%= f.input :language_details %>
-      <%= f.input :date_of_acquisition %>
-      <%= f.input :number_of_books %>
-      <%= f.input :notes %>
-      <%= f.input :in_my_collection %>
-      <%= f.input :wishlist %>
-      <!-- f.input :country -> ne fonctionne pas -->
 
-      <div class="form-actions d-flex justify-content-between align-items-end ">
-        <%= f.submit "Sauvegarder" %>
-        <%= link_to 'Back to books', books_path, class: "" %>
+<!--FORM MODAL -->
+<div class = "container mt-3" style = "width: 500px">
+  <div class="modal fade" id="updateModal-<%= book.id %>" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- FORM -->
+          <%= simple_form_for @book do |f| %>
+            <div class="">
+              <%= f.input :language, :label => "Langue" %>
+              <%= f.input :language_details %>
+              <%= f.input :date_of_acquisition %>
+              <%= f.input :number_of_books %>
+              <%= f.input :notes %>
+              <%= f.input :in_my_collection %>
+              <%= f.input :wishlist %>
+              <%= hidden_field_tag :previous_request, request.referer %>
+              <!-- f.input :country -> ne fonctionne pas -->
+
+              <div class="form-actions d-flex justify-content-between align-items-end ">
+                <%= f.submit "Sauvegarder" %>
+                <%= link_to 'Back to books', books_path, class: "" %>
+              </div>
+            </div>
+          <% end %>
+          <!-- FORM -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
-  <% end %>
+  </div>
 </div>
+<!--FORM MODAL -->

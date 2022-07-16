@@ -3,9 +3,15 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
 
+    if params[:query].present?
+      @books = @books.in_my_collection.where("language ILIKE ?", "%#{params[:query]}%")
+    else
+      @books
+    end
+
     respond_to do |format|
       format.html
-      format.text { render partial: "books/list", locals: {books: @books}, formats: [:html] }
+      format.text { render partial: "shared/list", locals: {books: @books}, formats: [:html] }
     end
   end
 
@@ -25,7 +31,7 @@ class BooksController < ApplicationController
 
   def update
     @book.update(book_params)
-    redirect_to books_path
+    redirect_to params[:previous_request]
   end
 
   def destroy
@@ -35,6 +41,17 @@ class BooksController < ApplicationController
 
   def collection
     @books = Book.in_my_collection
+
+    # if params[:query].present?
+    #   @books = @books.where("language ILIKE ?", "%#{params[:query]}%")
+    # else
+    #   @books
+    # end
+
+    # respond_to do |format|
+    #   format.html
+    #   format.text { render partial: "shared/list", locals: {books: @books}, formats: [:html] }
+    # end
   end
 
   def wishlist
@@ -49,5 +66,8 @@ class BooksController < ApplicationController
 
   def set_book
     @book = Book.find(params[:id])
+  end
+
+  def query
   end
 end

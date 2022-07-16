@@ -9,8 +9,8 @@
                       action: "keyup->searchbar#update"
                     } %>
   <% end %>
+
+  <%= render "shared/list", books: @books %>
+
+
 </div>
-
-<%= render "shared/list", books: @books %>
-
-<%= render "shared/modals" %>

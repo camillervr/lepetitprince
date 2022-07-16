@@ -1,33 +1,133 @@
-<table class="table container">
-  <thead>
-    <tr>
-      <th scope="col">Langue</th>
-      <th scope="col">Titre</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
+<div class="container" data-searchbar-target="list">
 
-  <tbody >
-    <% @books.find_each do |book| %>
+  <% if current_page?('/index') %>
+
+    <table class="table container">
+      <thead>
         <tr>
-          <td>
-            <%= book.language %>
-            <% unless book.language_details.to_s.empty? || book.language_details.nil? %>
-              <a data-bs-toggle="modal" data-bs-target="#languageDetailsModal">
-                <i class="fa-solid fa-circle-info"></i>
-              </a>
-            <% end %>
-          </td>
-          <td><img src="<%= book.title %>" alt=""></td>
-          <td><%= book.notes %></td>
-          <td>
-            <% if book.user == current_user %>
-              <%= link_to(edit_book_path(book), class: "data-bs-toggle='modal' data-bs-target='#updateModal'") do %>
-                <i class="fa-solid fa-pencil"></i>
-              <% end %>
-            <% end %>
-          </td>
+          <th scope="col">Langue</th>
+          <th scope="col">Titre</th>
+          <th scope="col"></th>
         </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody >
+        <% @books.find_each do |book| %>
+            <tr>
+              <td>
+                <%= book.language %>
+                <% unless book.language_details.to_s.empty? || book.language_details.nil? %>
+                  <a data-bs-toggle="modal" data-bs-target="#languageDetailsModal">
+                    <i class="fa-solid fa-circle-info"></i>
+                  </a>
+                <% end %>
+              </td>
+              <td><img src="<%= book.title %>" alt=""></td>
+              <td><%= book.notes %></td>
+              <td>
+                <% if book.user == current_user %>
+                  <%= link_to(edit_book_path(book), class: "data-bs-toggle='modal' data-bs-target='#updateModal'") do %>
+                    <i class="fa-solid fa-pencil"></i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+
+    <table class="table container">
+      <thead>
+        <tr>
+          <th scope="col">Langue</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Date d'aquisition</th>
+          <th scope="col">Notes</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @books.find_each do |book| %>
+          <tr>
+            <td>
+              <%= book.language %>
+              <% unless book.language_details.to_s.empty? || book.language_details.nil? %>
+                <a data-bs-toggle="modal" data-bs-target="#languageDetailsModal-<%= book.id %>">
+                  <i class="fa-solid fa-circle-info"></i>
+                </a>
+
+                <!-- LanguageDetailsModal -->
+                <div class="modal fade" id="languageDetailsModal-<%= book.id %>" tabindex="-1" aria-labelledby="languageDetailsModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="languageDetailsModalLabel">Info sur la langue</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <%= book.language_details %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-------------------------->
+
+              <% end %>
+            </td>
+            <td><img src="<%= book.title %>" alt=""></td>
+            <td><%= book.date_of_acquisition %></td>
+            <td><%= book.notes %></td>
+            <td>
+              <% if book.user == current_user %>
+                <a data-bs-toggle="modal" data-bs-target="#updateModal-<%= book.id %>">
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+
+                <!--FormModal -->
+                  <div class="modal fade" id="updateModal-<%= book.id %>" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="updateModalLabel">Modal title</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- Form -->
+                          <%= simple_form_for book do |f| %>
+                            <div class="">
+                              <%= f.input :language, :label => "Langue" %>
+                              <%= f.input :language_details %>
+                              <%= f.input :date_of_acquisition %>
+                              <%= f.input :number_of_books %>
+                              <%= f.input :notes %>
+                              <%= f.input :in_my_collection %>
+                              <%= f.input :wishlist %>
+                              <%= hidden_field_tag :previous_request, request.referer %>
+                              <!-- f.input :country -> ne fonctionne pas -->
+                            </div>
+                            <div class="modal-footer">
+                              <a class="btn btn-primary">
+                                <%= f.submit "Sauvegarder" %>
+                              </a>
+                            </div>
+                          <% end %>
+                          <!-- Form -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!--FormModal -->
+
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% end %>
+
+</div>

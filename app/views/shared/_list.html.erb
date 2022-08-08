@@ -88,17 +88,16 @@
 
                 <!--FormModal -->
                   <div class="modal fade" id="updateModal-<%= book.id %>" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="updateModalLabel">Modal title</h5>
+                          <h5 class="modal-title" id="updateModalLabel">Éditer le livre</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <!-- Form -->
                           <%= simple_form_for book do |f| %>
                             <div class="">
-                              <%= f.input :language, :label => "Langue" %>
                               <%= f.input :language_details %>
                               <%= f.input :date_of_acquisition %>
                               <%= f.input :number_of_books %>
@@ -109,9 +108,9 @@
                               <!-- f.input :country -> ne fonctionne pas -->
                             </div>
                             <div class="modal-footer">
-                              <a class="btn btn-primary">
+                              <button type="button" class="btn btn-primary">
                                 <%= f.submit "Sauvegarder" %>
-                              </a>
+                              </button>
                             </div>
                           <% end %>
                           <!-- Form -->

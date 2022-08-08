@@ -1,16 +1,6 @@
 <div class="container" data-controller="searchbar">
-  <%= form_with url: books_path, method: :get, html: {class: "mb-4", data: {searchbar_target: "form"}} do |f| %>
-    <%= f.text_field :query,
-                     class: "form-control",
-                     placeholder: "Cherchez une langue...",
-                     value: params[:query],
-                     data: {
-                      searchbar_target: "input",
-                      action: "keyup->searchbar#update"
-                    } %>
-  <% end %>
 
+  <%= render "shared/searchbar", books: @books %>
   <%= render "shared/list", books: @books %>
-
 
 </div>

@@ -20,3 +20,12 @@ body {
   background-color: #faf9f7;
   background-size: 36px 36px;
 }
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+    &:hover {
+      color: inherit;
+    }
+}
